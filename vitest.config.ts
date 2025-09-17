@@ -2,6 +2,13 @@
 import { defineConfig, configDefaults } from 'vitest/config';
 
 export default defineConfig({
+  // 🔑 Make "@/..." resolve to "src/..."
+  resolve: {
+    alias: {
+      '@': '/src', // so "@/utils/x" → "<repo>/src/utils/x"
+    },
+  },
+
   test: {
     environment: 'node',
     include: ['test/**/*.{test,spec}.ts'],
@@ -28,7 +35,7 @@ export default defineConfig({
     },
   },
 
-  // Vitest uses Vite's watcher: ignore generated folders here
+  // Ignore generated folders in watch mode
   server: {
     watch: {
       ignored: ['coverage/**', 'dist/**'],

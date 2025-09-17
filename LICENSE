@@ -1,21 +1,46 @@
-MIT License
+Proprietary License — Internal Use Only
 
-Copyright (c) 2025 TradingFrame
+Copyright (c) 2025 TradingFrame. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Grant. Subject to this License, TradingFrame (“Licensor”) grants only
+   TradingFrame and its employees and individual contractors acting on its behalf
+   (together, “Licensee”) a non-exclusive, non-transferable, non-sublicensable license to:
+   use, copy, and modify the Software solely for Licensee’s internal business purposes.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+2. Restrictions.
+   (a) No Redistribution. Licensee must not distribute, publish, make available, or
+   otherwise provide the Software (or any derivative works) to any third party.
+   (b) No Hosting for Others. Licensee must not provide the Software as a service to,
+   or on behalf of, any third party (including SaaS, APIs, or managed services).
+   (c) No Sublicensing or Assignment. Licensee may not sublicense, assign, or transfer
+   any rights under this License, except to individual contractors under written
+   agreement requiring confidentiality and compliance with this License.
+   (d) No Removal of Notices. Licensee must preserve all proprietary notices.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+3. Ownership. The Software is licensed, not sold. Licensor retains all right, title, and
+   interest in and to the Software and all copies and derivative works thereof.
+
+4. Feedback. If Licensee provides feedback, ideas, or suggestions, Licensor may use them
+   without restriction or obligation.
+
+5. Term & Termination. This License continues until terminated. Licensor may terminate this
+   License immediately upon notice if Licensee breaches it. Upon termination, Licensee must
+   stop using the Software and destroy all copies.
+
+6. No Warranty. THE SOFTWARE IS PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+   AND NON-INFRINGEMENT.
+
+7. Limitation of Liability. TO THE MAXIMUM EXTENT PERMITTED BY LAW, LICENSOR WILL NOT BE
+   LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR
+   FOR ANY LOSS OF PROFITS, REVENUE, OR DATA, ARISING OUT OF OR RELATING TO THIS LICENSE
+   OR THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. LICENSOR’S TOTAL
+   LIABILITY WILL NOT EXCEED US$100.
+
+8. Confidentiality. The Software and any non-public information about it are Licensor’s
+   confidential information. Licensee must protect it using at least reasonable care and
+   not disclose it to third parties.
+
+9. Governing Law. This License is governed by the laws of Argentina excluding conflict-of-laws rules.
+
+END OF TERMS

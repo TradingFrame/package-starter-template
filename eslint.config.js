@@ -50,6 +50,8 @@ export default [
     settings: {
       'import-x/resolver': { typescript: true, node: true },
       'import-x/extensions': ['.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs'],
+      // Treat "@/..." as "internal" imports for ordering & grouping
+      'import-x/internal-regex': '^@/',
     },
   },
 
@@ -94,6 +96,13 @@ export default [
             ['internal', 'parent', 'sibling', 'index', 'object', 'type'],
           ],
           pathGroupsExcludedImportTypes: ['builtin'],
+          pathGroups: [
+            {
+              pattern: '@/**',
+              group: 'internal',
+              position: 'before', // keep aliases above relative internal imports
+            },
+          ],
         },
       ],
 

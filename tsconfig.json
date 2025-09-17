@@ -1,15 +1,35 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    // Modern output for Node 22 / modern bundlers
     "target": "ES2022",
+    "lib": ["ES2022"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "moduleDetection": "force",
     "verbatimModuleSyntax": true,
     "resolveJsonModule": true,
-    "strict": true,
-    "skipLibCheck": true,
+
+    // Declarations handled by tsdown, but TS needs these flags for checks
     "declaration": true,
     "isolatedDeclarations": true,
-    "noEmit": true
+    "noEmit": true,
+
+    // Strictness tuned for libraries (safety without pain)
+    "strict": true,
+    "skipLibCheck": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "useUnknownInCatchVariables": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // Keep TS focused on types; ESLint handles unused vars/locals
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src"],
   "exclude": ["dist", "node_modules"]
