@@ -1,22 +1,23 @@
 # Typescript Boilerplate
 
-> Production-ready TypeScript library template for Node 22+ and browsers.
-> Batteries included: pnpm, tsdown, dual ESM/CJS, strict TS, path alias @/, Vitest, ESLint (flat) + Prettier, Git hooks, and GitHub Actions.
+> Production-ready TypeScript library template for Node 22+ and browsers.  
+> Batteries included: pnpm, tsdown, dual ESM/CJS, strict TS, path alias `@/`, Vitest, ESLint (flat) + Prettier, Git hooks, and GitHub Actions.
 
 ## Requirements
-- Node ≥ 22.6
-- pnpm 10.x
+
+- **Node** ≥ 22.6
+- **pnpm** 10.x
 
 ## Quick start
 
-```
+```bash
 pnpm i
 pnpm run verify   # typecheck → lint → prettier check → test → build
 ```
 
-Dev loop:
+**Dev loop**
 
-```
+```bash
 pnpm dev    # tsdown watch
 pnpm test   # vitest
 pnpm build  # tsdown build (esm + cjs + d.ts)
@@ -24,71 +25,79 @@ pnpm build  # tsdown build (esm + cjs + d.ts)
 
 ## What you get
 
-- Dual builds: ESM (`.mjs`) + CJS (`.cjs`) + types (`.d.ts`) in dist/
-- Modern TS config (ES2022, bundler resolution, strict but ergonomic)
-- Path alias: `@/` → `src/` (wired in TS, tsdown, Vitest, ESLint)
-- Testing: Vitest, clear `test/**` layout (typed tests; no coverage in CI by default)
-- Quality: ESLint (flat, 2025 best-practice rules) + Prettier
-- DX: VS Code settings, `.editorconfig`, fast pre-commit with lint-staged
-- CI: GitHub Actions (install → typecheck → lint → format check → test → build)
-- Conventions: Commit/branch validator (Conventional-ish)
+- **Dual builds**: ESM (`.mjs`) + CJS (`.cjs`) + types (`.d.ts`) in `dist/`
+- **Modern TS config** (ES2022, bundler resolution, strict but ergonomic)
+- **Path alias**: `@/` → `src/` (wired in TS, tsdown, Vitest, ESLint)
+- **Testing**: Vitest, clear `test/**` layout (typed tests; no coverage in CI by default)
+- **Quality**: ESLint (flat, 2025 best-practice rules) + Prettier
+- **DX**: VS Code settings, `.editorconfig`, fast pre-commit with lint-staged
+- **CI**: GitHub Actions (install → typecheck → lint → format check → test → build)
+- **Conventions**: Commit/branch validator (Conventional-ish)
 
 ## Path aliases
 
-- TypeScript (`tsconfig.json`):
-```
-"baseUrl": ".",
-"paths": { "@/*": ["src/*"] }
+- **TypeScript** (`tsconfig.json`):
+
+```json
+{
+  "baseUrl": ".",
+  "paths": { "@/*": ["src/*"] }
+}
 ```
 
-- Bundler (tsdown) (`tsdown.config.ts`):
-```
+- **Bundler (tsdown)** (`tsdown.config.ts`):
+
+```ts
 alias: { "@/": "src/" }
 ```
 
-- Vitest (`vitest.config.ts`):
-```
+- **Vitest** (`vitest.config.ts`):
+
+```ts
 resolve: { alias: { "@": "/src" } }
 ```
 
-- ESLint (`eslint.config.js`):
+- **ESLint** (`eslint.config.js`):
   - Resolves TS paths
   - Marks `@/**` as internal in import ordering
 
-Use it like:
-```
-import { sum } from "@/index";
+**Use it like**:
+
+```ts
+import { sum } from '@/index';
 ```
 
 ## Scripts
 
-| Script           | What it does                                         |
-| ---------------- | ---------------------------------------------------- |
-| `dev`            | tsdown watch                                         |
-| `build`          | build ESM+CJS+d.ts to `dist/`                        |
-| `test`           | run tests (Vitest)                                   |
-| `test:watch`     | run tests in watch mode                              |
-| `test:coverage`  | (optional local) tests with coverage report          |
-| `typecheck`      | `tsc --noEmit` on library                            |
-| `typecheck:test` | `tsc --noEmit` on tests                              |
-| `typecheck:all`  | typecheck lib + tests                                |
-| `lint`           | ESLint (strict; no warnings allowed in CI)           |
-| `lint:fix`       | ESLint with fixes                                    |
-| `format`         | Prettier write                                       |
-| `format:check`   | Prettier check                                       |
-| `verify`         | typecheck\:all → lint → format\:check → test → build |
+| Script           | What it does                                       |
+| ---------------- | -------------------------------------------------- |
+| `dev`            | tsdown watch                                       |
+| `build`          | build ESM+CJS+d.ts to `dist/`                      |
+| `test`           | run tests (Vitest)                                 |
+| `test:watch`     | run tests in watch mode                            |
+| `test:coverage`  | (optional local) tests with coverage report        |
+| `typecheck`      | \`tsc --noEmit\` on library                        |
+| `typecheck:test` | \`tsc --noEmit\` on tests                          |
+| `typecheck:all`  | typecheck lib + tests                              |
+| `lint`           | ESLint (strict; no warnings allowed in CI)         |
+| `lint:fix`       | ESLint with fixes                                  |
+| `format`         | Prettier write                                     |
+| `format:check`   | Prettier check                                     |
+| `verify`         | typecheck:all → lint → format:check → test → build |
+
+> After cloning, run **`pnpm run prepare`** to (re)install local git hooks.
 
 ## Linting & formatting
 
-- ESLint (flat config) with `@typescript-eslint` and `eslint-plugin-import-x`:
+- **ESLint** (flat config) with `@typescript-eslint` and `eslint-plugin-import-x`:
   - focuses on correctness/safety (no style bikeshedding)
-  - typed rules only for `src/**` tests are fast/relaxed
-- Prettier handles formatting (rules in `prettier.config.js`)
-- VS Code auto-formats on save; ESLint fixes on explicit save (configurable)
+  - typed rules only for `src/**`; tests are fast/relaxed
+- **Prettier** handles formatting (rules in `prettier.config.js`)
+- **VS Code** auto-formats on save; ESLint fixes on explicit save (configurable)
 
-Run:
+**Run**:
 
-```
+```bash
 pnpm run lint
 pnpm run lint:fix
 pnpm run format
@@ -96,21 +105,25 @@ pnpm run format
 
 ## Git hooks & commit/branch rules
 
-Configured via simple-git-hooks + lint-staged:
-- Pre-commit: ESLint + Prettier on staged files
-- Pre-push: typecheck + tests
-- Commit message must start with one of:
+Configured via **simple-git-hooks** + **lint-staged**:
+
+- **Pre-commit**: ESLint + Prettier on staged files
+- **Pre-push**: typecheck + tests
+- **Commit message** must start with one of:
+
 ```
 chore: … | feat: … | refactor: … | fix: … | hotfix: … | release: …
 ```
-- Branch names (except main/master/manually added exceptions) must match:
+
+- **Branch names** (except main/master/manually added exceptions) must match:
+
 ```
 <type>/<anything>     # e.g., feat/add-ohlcv-loader
 ```
 
 Types: `chore`, `feat`, `refactor`, `fix`, `hotfix`, `release`.
 
-Bypass (not recommended): `--no-verify`
+_Bypass (not recommended):_ `--no-verify`
 
 ## License & Usage
 
