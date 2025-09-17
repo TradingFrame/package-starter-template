@@ -5,6 +5,7 @@ import prettier from 'eslint-config-prettier';
 import { importX } from 'eslint-plugin-import-x';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
+import globals from 'globals';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -162,6 +163,20 @@ export default [
     },
   },
 
-  // 5) Let Prettier own formatting (turns off conflicting rules)
+  // 5) Node scripts (git hooks, tooling): enable Node globals & allow console
+  {
+    files: ['scripts/**/*.{js,mjs,cjs,ts}'],
+    languageOptions: {
+      // Mark Node globals so "process"/"console" are defined
+      globals: globals.node,
+      // Our hook uses ESM (.mjs)
+      sourceType: 'module',
+    },
+    rules: {
+      'no-console': 'off',
+    },
+  },
+
+  // 6) Let Prettier own formatting (turns off conflicting rules)
   prettier,
 ];

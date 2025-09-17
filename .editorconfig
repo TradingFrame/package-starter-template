@@ -1,0 +1,16 @@
+# EditorConfig helps editors match the repo's conventions (Prettier-friendly)
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Indentation: match our Prettier/VSC settings
+indent_style = space
+indent_size = 2
+
+[*.md]
+# Keep Markdown tidy but don't eat intentional whitespace blocks
+trim_trailing_whitespace = false

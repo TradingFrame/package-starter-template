@@ -44,7 +44,8 @@
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged --concurrent false",
-    "pre-push": "pnpm run typecheck:all"
+    "pre-push": "pnpm run typecheck:all",
+    "commit-msg": "node scripts/verify-commit.mjs $1"
   },
   "lint-staged": {
     "*.{md,yml,yaml,json}": "prettier --write --ignore-unknown",
@@ -65,6 +66,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.1",
+    "globals": "^16.4.0",
     "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
