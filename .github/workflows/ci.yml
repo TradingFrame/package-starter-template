@@ -1,3 +1,12 @@
+# .github/workflows/ci.yml
+# ────────────────────────────────────────────────────────────────────────────────
+# CI for Modern TS Library Template
+# - Triggers on PRs and pushes to main/master
+# - Uses PNPM + Node 22.x
+# - Runs: typecheck (src+tests) → eslint → prettier check → tests → build
+# - Cancels in-flight runs on new commits to the same ref
+# ────────────────────────────────────────────────────────────────────────────────
+
 name: CI
 
 on:
@@ -10,40 +19,50 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-test-lint:
+  quality-and-build:
+    name: ✅ Quality & Build
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      CI: true
 
     steps:
-      - name: Checkout
+      # ── Source checkout ───────────────────────────────────────────────────────
+      - name: ⬇️ Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup PNPM
+      # ── Tooling setup ────────────────────────────────────────────────────────
+      - name: 🧰 Setup PNPM
         uses: pnpm/action-setup@v3
         with:
+          # keep aligned with "packageManager" in package.json (pnpm@10.x)
           version: 10
 
-      - name: Setup Node.js
+      - name: 🟩 Setup Node.js (22.x)
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: pnpm
 
-      - name: Install deps
+      # ── Install ─────────────────────────────────────────────────────────────
+      - name: 📦 Install dependencies (frozen lockfile)
         run: pnpm install --frozen-lockfile
 
-      - name: Typecheck (src + tests)
+      # ── Static checks ───────────────────────────────────────────────────────
+      - name: 🔎 Typecheck (src + tests)
         run: pnpm run typecheck:all
 
-      - name: Lint
+      - name: 🧹 Lint (ESLint)
         run: pnpm run lint
 
-      - name: Prettier check
+      - name: ✨ Prettier format check
         run: pnpm run format:check
 
-      - name: Test
+      # ── Tests ─────────────────────────────────────────────────
+      - name: 🧪 Unit tests
         run: pnpm test
 
-      - name: Build
+      # ── Build artifacts ─────────────────────────────────────────────────────
+      - name: 🏗️ Build library (tsdown)
         run: pnpm run build
