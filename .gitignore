@@ -1,0 +1,68 @@
+# Dependency directories
+node_modules/
+.pnpm-store/
+.npm/
+.yarn/
+
+# Build outputs
+/dist/
+dist-*/
+/build/
+/lib/
+/esm/
+/cjs/
+/types/
+*.tsbuildinfo
+*.tsbuildinfo.*
+
+# Playground & example artifacts
+/playground/dist/
+examples/**/dist/
+examples/**/node_modules/
+
+# Package publishing
+*.tgz
+*.tar
+*.gz
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing & coverage
+/coverage/
+.vitest/
+reports/
+playwright-report/
+/test-results/
+
+# Tool caches
+.eslintcache
+.stylelintcache
+.turbo/
+.parcel-cache/
+.rpt2_cache/
+.webpack-cache/
+.rollup.cache/
+.cache/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS & editor metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sw?
+.sass-cache/
+
+# Misc
+/tmp/
+/temp/
