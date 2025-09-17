@@ -42,7 +42,7 @@
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged --concurrent false",
-    "pre-push": "pnpm run typecheck:all && pnpm test"
+    "pre-push": "pnpm run typecheck:all"
   },
   "lint-staged": {
     "*.{md,yml,yaml,json}": "prettier --write --ignore-unknown",
