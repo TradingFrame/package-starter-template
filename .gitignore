@@ -59,7 +59,11 @@ playwright-report/
 .DS_Store
 Thumbs.db
 .idea/
-.vscode/
+# keep .vscode ignored by default
+.vscode/*
+# …but allow these to be committed
+!.vscode/settings.json
+!.vscode/extensions.json
 *.sw?
 .sass-cache/
 

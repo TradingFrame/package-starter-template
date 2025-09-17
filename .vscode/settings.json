@@ -1,0 +1,39 @@
+{
+  // --- Prettier as the formatter, on every save ---
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.requireConfig": true,
+
+  // Per-language guards (VS Code sometimes falls back to built-in TS/JS formatter)
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true },
+  "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true },
+  "[javascriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true },
+
+  // --- Consistent whitespace/EOL ---
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  // --- ESLint: run fixes when you save (set to true if you want auto-fix; "explicit" if you prefer Ctrl+S twice) ---
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // --- ESLint flat config support (we’ll add it next) ---
+  "eslint.enable": true,
+  "eslint.experimental.useFlatConfig": true,
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.probe": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs"],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+
+  // Ignore generated folders so tests don’t rerun endlessly
+  "eslint.ignores": ["dist/**", "coverage/**"],
+
+  // Vite/Vitest watcher ignores (for test runs)
+  "files.watcherExclude": {
+    "**/dist/**": true,
+    "**/coverage/**": true
+  }
+}

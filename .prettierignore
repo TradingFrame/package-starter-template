@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build outputs
+dist/
+coverage/
+build/
+reports/
+.out/
+.tmp/
+.cache/
+.turbo/
+.nyc_output/
+
+# package manager artifacts
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# editor / env
+.vscode/
+.idea/
+.eslintcache
+.DS_Store
+
+# logs & generated
+*.log
+*.min.js
