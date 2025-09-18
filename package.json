@@ -42,7 +42,7 @@
     "format:check": "prettier --check .",
     "verify": "pnpm run typecheck:all && pnpm run lint && pnpm run format:check && pnpm test && pnpm run build",
     "play:browser": "vite --config playgrounds/browser/vite.config.ts",
-    "play:browser:build": "vite build --config playgrounds/browser/vite.config.ts",
+    "play:browser:dist": "pnpm run build && cross-env PLAY_FROM=dist vite --config playgrounds/browser/vite.config.ts",
     "play:browser:preview": "vite preview --config playgrounds/browser/vite.config.ts",
     "play:node": "tsx playgrounds/node/server.ts",
     "play:node:watch": "tsx watch playgrounds/node/server.ts"
@@ -72,6 +72,7 @@
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.3",
     "@vitest/coverage-v8": "^3.2.4",
+    "cross-env": "^10.0.0",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",

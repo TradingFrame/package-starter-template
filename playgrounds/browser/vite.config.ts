@@ -4,29 +4,30 @@ import { resolve } from 'node:path';
 
 const REPO_ROOT = resolve(__dirname, '../..');
 const SRC_ABS = resolve(REPO_ROOT, 'src');
+const DIST_ABS = resolve(REPO_ROOT, 'dist');
+
+const PLAY_FROM = (process.env.PLAY_FROM || 'src').toLowerCase();
+const USE_DIST = PLAY_FROM === 'dist';
 
 export default defineConfig({
   root: __dirname,
   plugins: [
     react(),
-    // Ensure HMR watches files outside the playground root (../../src)
     {
-      name: 'watch-external-src',
+      name: 'watch-external',
       configureServer(server) {
-        server.watcher.add(SRC_ABS);
+        // 👇 In src mode, watch ../../src; in dist mode, watch ../../dist
+        server.watcher.add(USE_DIST ? DIST_ABS : SRC_ABS);
       },
     },
   ],
   resolve: {
     alias: {
-      '@': SRC_ABS,
+      '@': USE_DIST ? DIST_ABS : SRC_ABS,
     },
   },
   server: {
     open: true,
-    fs: {
-      // allow reading from the repo root (so "@/..." works from ../../src)
-      allow: [REPO_ROOT],
-    },
+    fs: { allow: [REPO_ROOT, SRC_ABS, DIST_ABS] },
   },
 });
