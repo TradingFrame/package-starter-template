@@ -50,7 +50,10 @@
     "play:node": "tsx playgrounds/node/server.ts",
     "play:node:watch": "tsx watch playgrounds/node/server.ts",
     "play:node:dist": "pnpm run build && cross-env PLAY_FROM=dist tsx playgrounds/node/server.ts",
-    "play:node:dist:watch": "cross-env PLAY_FROM=dist tsx watch playgrounds/node/server.ts"
+    "play:node:dist:watch": "cross-env PLAY_FROM=dist tsx watch playgrounds/node/server.ts",
+    "changeset": "changeset",
+    "version:packages": "changeset version",
+    "publish:packages": "changeset publish"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged --concurrent false",
@@ -70,6 +73,7 @@
     ]
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.7",
     "@eslint/js": "^9.35.0",
     "@types/express": "^5.0.3",
     "@types/node": "^24.5.1",

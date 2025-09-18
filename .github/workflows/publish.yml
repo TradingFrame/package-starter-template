@@ -1,0 +1,74 @@
+name: Release (Changesets → npm)
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish if releasable
+    runs-on: ubuntu-latest
+
+    # 👇 define env once; do not reference secrets in any "if:"
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      HAS_NPM_TOKEN: ${{ secrets.NPM_TOKEN != '' }}
+
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v4
+
+      - name: 🧰 Setup PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10
+
+      - name: 🟩 Setup Node.js (22.x)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: pnpm
+          registry-url: https://registry.npmjs.org/
+
+      - name: 📦 Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔎 Check package privacy
+        id: pkg
+        shell: bash
+        run: |
+          node -e "const p=require('./package.json'); console.log('isPrivate='+(p.private ? 'true' : 'false'))" >> \"$GITHUB_OUTPUT\"
+
+      - name: 🛑 Skip (package is private)
+        if: steps.pkg.outputs.isPrivate == 'true'
+        run: |
+          echo 'package.json has "private": true - skipping publish.'
+
+      - name: 🏗️ Build
+        if: steps.pkg.outputs.isPrivate != 'true'
+        run: pnpm run build
+
+      # Publishes any unpublished versions already on main (after Version PR merge).
+      # No-ops if there is nothing to publish.
+      - name: 🚀 Publish to npm (Changesets)
+        if: steps.pkg.outputs.isPrivate != 'true' && env.HAS_NPM_TOKEN == 'true'
+        uses: changesets/action@v1
+        with:
+          publish: pnpm run publish:packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ env.NPM_TOKEN }}
+
+      - name: ℹ️ Note (no NPM_TOKEN configured)
+        if: steps.pkg.outputs.isPrivate != 'true' && env.HAS_NPM_TOKEN != 'true'
+        run: |
+          echo "NPM_TOKEN is not set - skipping publish."
+          echo "Add repository secret NPM_TOKEN to enable publishing."
