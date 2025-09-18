@@ -1,14 +1,17 @@
-// Enable TS path aliases (e.g., "@/index") at runtime:
+/* eslint-env node */
+// Ensure "@/..." alias works in SRC mode before imports
 import 'tsconfig-paths/register';
 
 import express, { type Request, type Response } from 'express';
-import { sum } from '@/index';
+import { loadLibrary, USE_DIST } from './lib/load-lib';
+
+const { sum } = await loadLibrary();
 
 const app = express();
 
 /** Simple health check */
 app.get('/ping', (_req: Request, res: Response) => {
-  res.json({ ok: true, ts: Date.now() });
+  res.json({ ok: true, ts: Date.now(), mode: USE_DIST ? 'dist' : 'src' });
 });
 
 /** Demo endpoint: /sum?a=1&b=2 */
@@ -23,7 +26,7 @@ app.get('/sum', (req: Request, res: Response) => {
     });
   }
 
-  return res.json({ a, b, result: sum(a, b) });
+  return res.json({ a, b, result: sum(a, b), mode: USE_DIST ? 'dist' : 'src' });
 });
 
 const PORT = Number(process.env.PORT ?? 3001);
