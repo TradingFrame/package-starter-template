@@ -177,6 +177,49 @@ export default [
     },
   },
 
-  // 6) Let Prettier own formatting (turns off conflicting rules)
+  // 6) Browser playground: enable DOM globals, relax console
+  {
+    files: ['playgrounds/browser/**/*.{ts,tsx,js,jsx}'],
+    languageOptions: {
+      sourceType: 'module',
+      globals: {
+        // browser globals (window, document, etc.)
+        ...globals.browser,
+      },
+    },
+    // Make the TS path alias work for the playground’s own tsconfig
+    settings: {
+      'import-x/resolver': {
+        typescript: { project: './playgrounds/browser/tsconfig.json' },
+        node: true,
+      },
+    },
+    rules: {
+      'no-console': 'off',
+    },
+  },
+
+  // 7) Node playground: enable Node globals, relax console
+  {
+    files: ['playgrounds/node/**/*.{ts,tsx,js,jsx,mjs,cjs}'],
+    languageOptions: {
+      sourceType: 'module',
+      globals: {
+        // node globals (process, __dirname, etc.)
+        ...globals.node,
+      },
+    },
+    settings: {
+      'import-x/resolver': {
+        typescript: { project: './playgrounds/node/tsconfig.json' },
+        node: true,
+      },
+    },
+    rules: {
+      'no-console': 'off',
+    },
+  },
+
+  // 8) Let Prettier own formatting (turns off conflicting rules)
   prettier,
 ];
