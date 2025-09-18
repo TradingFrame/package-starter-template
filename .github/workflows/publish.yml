@@ -45,7 +45,8 @@ jobs:
         id: pkg
         shell: bash
         run: |
-          node -e "const p=require('./package.json'); console.log('isPrivate='+(p.private ? 'true' : 'false'))" >> \"$GITHUB_OUTPUT\"
+          PRIV=$(node -pe "require('./package.json').private ? 'true' : 'false'")
+          echo "isPrivate=$PRIV" >> "$GITHUB_OUTPUT"
 
       - name: 🛑 Skip (package is private)
         if: steps.pkg.outputs.isPrivate == 'true'
